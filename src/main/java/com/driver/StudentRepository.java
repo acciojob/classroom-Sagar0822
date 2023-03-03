@@ -57,20 +57,23 @@ public class StudentRepository {
     //get all student
     public List<String> getAllStudents(){
         List<String> students = new ArrayList<>();
-        students = (List<String>) studentDb.keySet();
+        for(String stud : studentDb.keySet()){
+            students.add(stud);
+        }
         return students;
     }
 
     //Delete teacher and students of this teacher
     public void deleteTeacherByName(String teacher){
         List<String> students = new ArrayList<>();
-        if(studentTeacherPairDb.containsKey(teacher)){
+        if(studentTeacherPairDb.containsKey(teacher)) {
             students = studentTeacherPairDb.get(teacher);
             studentTeacherPairDb.remove(teacher);
-        }
-        for(String student : students){
-            if(studentDb.containsKey(student))
-                studentDb.remove(student);
+
+            for (String student : students) {
+                if (studentDb.containsKey(student))
+                    studentDb.remove(student);
+            }
         }
     }
     //Delete all students and teachers
